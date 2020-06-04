@@ -22,7 +22,7 @@ func TestLinearSearch(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		actual := linearSearch(a, 100, tt.target)
+		actual := linearSearch(a, tt.target)
 		if tt.expected != actual {
 			t.Errorf("expected %d but got %d\n", tt.expected, actual)
 		}
@@ -38,7 +38,7 @@ func BenchmarkLinearSearch(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		for j := 0; j < 1000; j++ {
-			linearSearch(a, 100, j)
+			linearSearch(a, j)
 		}
 	}
 }
