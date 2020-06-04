@@ -50,3 +50,26 @@ func BenchmarkLinearSearch(b *testing.B) {
 		}
 	}
 }
+
+func TestiBetterLinearSearch(t *testing.T) {
+	a := prepareArray()
+	tests := prepareTable()
+
+	for _, tt := range tests {
+		actual := betterLinearSearch(a, tt.target)
+		if tt.expected != actual {
+			t.Errorf("expected %d but got %d\n", tt.expected, actual)
+		}
+	}
+}
+
+func BenchmarkBetterLinearSearch(b *testing.B) {
+	a := prepareArray()
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for j := 0; j < 1000; j++ {
+			betterLinearSearch(a, j)
+		}
+	}
+}

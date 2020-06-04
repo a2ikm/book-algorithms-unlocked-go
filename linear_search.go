@@ -12,3 +12,13 @@ func linearSearch(a [100]int, x int) int {
 	}
 	return ret
 }
+
+func betterLinearSearch(a [100]int, x int) int {
+	n := len(a)
+	for i := 0; i < n; i++ {
+		if a[i] == x {
+			return i
+		}
+	}
+	return NotFound
+}
