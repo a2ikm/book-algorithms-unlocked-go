@@ -22,3 +22,18 @@ func betterLinearSearch(a [100]int, x int) int {
 	}
 	return NotFound
 }
+func sentinelLinearSearch(a [100]int, x int) int {
+	n := len(a)
+	last := a[n-1]
+	a[n-1] = x
+	i := 0
+	for a[i] != x {
+		i += 1
+	}
+	a[n-1] = last
+	if i < n || a[n] == x {
+		return i
+	} else {
+		return NotFound
+	}
+}

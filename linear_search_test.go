@@ -73,3 +73,26 @@ func BenchmarkBetterLinearSearch(b *testing.B) {
 		}
 	}
 }
+
+func TestiSentinelLinearSearch(t *testing.T) {
+	a := prepareArray()
+	tests := prepareTable()
+
+	for _, tt := range tests {
+		actual := sentinelLinearSearch(a, tt.target)
+		if tt.expected != actual {
+			t.Errorf("expected %d but got %d\n", tt.expected, actual)
+		}
+	}
+}
+
+func BenchmarkSentinelLinearSearch(b *testing.B) {
+	a := prepareArray()
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for j := 0; j < 1000; j++ {
+			sentinelLinearSearch(a, j)
+		}
+	}
+}
