@@ -28,3 +28,17 @@ func TestLinearSearch(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkLinearSearch(b *testing.B) {
+	var a [100]int
+	for i := 0; i < 100; i++ {
+		a[i] = i*10 + 1
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for j := 0; j < 1000; j++ {
+			linearSearch(a, 100, j)
+		}
+	}
+}
