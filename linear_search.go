@@ -31,7 +31,7 @@ func sentinelLinearSearch(a [100]int, x int) int {
 		i += 1
 	}
 	a[n-1] = last
-	if i < n || a[n] == x {
+	if a[i] == x {
 		return i
 	} else {
 		return NotFound
