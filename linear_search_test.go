@@ -2,13 +2,19 @@ package main
 
 import "testing"
 
-func TestLinearSearch(t *testing.T) {
+func prepareArray() [100]int {
 	var a [100]int
 	for i := 0; i < 100; i++ {
 		a[i] = i*10 + 1
 	}
+	return a
+}
 
-	tests := []struct {
+func prepareTable() []struct {
+	target   int
+	expected int
+} {
+	return []struct {
 		target   int
 		expected int
 	}{
@@ -20,6 +26,11 @@ func TestLinearSearch(t *testing.T) {
 		{991, 99},
 		{992, NotFound},
 	}
+}
+
+func TestLinearSearch(t *testing.T) {
+	a := prepareArray()
+	tests := prepareTable()
 
 	for _, tt := range tests {
 		actual := linearSearch(a, tt.target)
@@ -30,10 +41,7 @@ func TestLinearSearch(t *testing.T) {
 }
 
 func BenchmarkLinearSearch(b *testing.B) {
-	var a [100]int
-	for i := 0; i < 100; i++ {
-		a[i] = i*10 + 1
-	}
+	a := prepareArray()
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
