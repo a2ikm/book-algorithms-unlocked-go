@@ -58,3 +58,32 @@ func BenchmarkBinarySearch(b *testing.B) {
 		}
 	}
 }
+
+func TestRecursiveBinarySearch(t *testing.T) {
+	a := prepareArray2()
+	tests := prepareTable2()
+
+	for _, tt := range tests {
+		i, found := RecursiveBinarySearch(a, tt.target)
+		if tt.found {
+			if tt.found != found || tt.index != i {
+				t.Errorf("expected (%d, %t) but got (%d, %t)\n", tt.index, tt.found, i, found)
+			}
+		} else {
+			if tt.found != found {
+				t.Errorf("expected (_, %t) but got (_, %t)\n", tt.found, found)
+			}
+		}
+	}
+}
+
+func BenchmarkRecursiveBinarySearch(b *testing.B) {
+	a := prepareArray2()
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for j := 0; j < 1000; j++ {
+			RecursiveBinarySearch(a, j)
+		}
+	}
+}
