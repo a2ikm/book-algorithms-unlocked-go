@@ -24,3 +24,22 @@ func BenchmarkSelectionSort(b *testing.B) {
 		SelectionSort(a)
 	}
 }
+
+func TestMergeSort(t *testing.T) {
+	a := prepareArray3()
+	MergeSort(a)
+
+	for i := 0; i < len(a)-1; i++ {
+		if a[i] > a[i+1] {
+			t.Errorf("expected b[i] <= b[i+1] but got %d > %d at i = %d\n", a[i], a[i+1], i)
+		}
+	}
+}
+
+func BenchmarkMergeSort(b *testing.B) {
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a := prepareArray3()
+		MergeSort(a)
+	}
+}
