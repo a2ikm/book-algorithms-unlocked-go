@@ -56,3 +56,29 @@ func merge(a []int, p, q, r int) {
 		}
 	}
 }
+
+func QuickSort(a []int) {
+	quickSort(a, 0, len(a)-1)
+}
+
+func quickSort(a []int, p, r int) {
+	if p >= r {
+		return
+	}
+
+	q := partition(a, p, r)
+	quickSort(a, p, q-1)
+	quickSort(a, q+1, r)
+}
+
+func partition(a []int, p, r int) int {
+	q := p
+	for u := p; u <= r-1; u++ {
+		if a[u] <= a[r] {
+			a[q], a[u] = a[u], a[q]
+			q++
+		}
+	}
+	a[q], a[r] = a[r], a[q]
+	return q
+}

@@ -43,3 +43,22 @@ func BenchmarkMergeSort(b *testing.B) {
 		MergeSort(a)
 	}
 }
+
+func TestQuickSort(t *testing.T) {
+	a := prepareArray3()
+	QuickSort(a)
+
+	for i := 0; i < len(a)-1; i++ {
+		if a[i] > a[i+1] {
+			t.Errorf("expected b[i] <= b[i+1] but got %d > %d at i = %d\n", a[i], a[i+1], i)
+		}
+	}
+}
+
+func BenchmarkQuickSort(b *testing.B) {
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		a := prepareArray3()
+		QuickSort(a)
+	}
+}
